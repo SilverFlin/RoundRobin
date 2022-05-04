@@ -12,30 +12,26 @@ class Memoria
   }
   
 }
-class Tarea 
-{
-constructor(numero,tiempo,tamano,estado) 
-  {
-        this.numero = numero;
-        this.tiempo = tiempo;
-        this.tamano = tamano;
-        this.estado = estado;
-    
-        getSEstado()
-    {
-        switch(estado)
-        {
-            case 0:
-                return "";
-            case 1:
-                return "En espera";
-            case 2:
-                return "Asignado";
-            case 3:
-                return "Terminado";
-        }
-        return "";
-    }
-    
+
+class Tarea {
+  constructor(numero, tiempo, tamano, estado) {
+    this.numero = numero;
+    this.tiempo = tiempo;
+    this.tamano = tamano;
+    this.estado = estado;
   }
+
+  getSEstado = () => {
+    switch (this.estado) {
+      case 0:
+        return "";
+      case 1:
+        return "En espera";
+      case 2:
+        return "Asignado";
+      case 3:
+        return "Terminado";
+    }
+    return "";
+  };
 }
