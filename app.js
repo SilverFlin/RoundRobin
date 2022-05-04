@@ -12,3 +12,11 @@ class Memoria
   }
   
 }
+class Memoria 
+{
+conastructor(numero,tiempo, tamano,estado) {
+        this.numero = numero;
+        this.tiempo = tiempo;
+        this.tamano = tamano;
+        this.estado = estado;
+    }
