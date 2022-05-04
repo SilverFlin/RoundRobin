@@ -14,7 +14,8 @@ class Memoria
 }
 
 class Tarea {
-  constructor(numero, tiempo, tamano, estado) {
+  constructor(numero, tiempo, tamano, estado) 
+  {
     this.numero = numero;
     this.tiempo = tiempo;
     this.tamano = tamano;
