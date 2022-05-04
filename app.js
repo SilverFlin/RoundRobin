@@ -36,12 +36,9 @@ class Tarea {
     return "";
   };
 }
-class Proceso 
-{
-  
-  
-  constructor() 
-  {
+class Proceso {
+
+  constructor() {
         this.QUANTUM = 5;
         let memoria= 50000;
         let numBloque = 1;
@@ -51,23 +48,72 @@ class Proceso
         this.tarea= [];
         this.memorias= [];
         this.mmemorias= [];
-        for(let cont=0; cont<25; cont++)
-        {
+        for(let cont=0; cont<25; cont++){
             tarea[cont] = new this.tarea(cont+1, this.tiempo[cont], this.tamano[cont], 0);
         }
-    
   }
-  getTareaM(num)
-    {
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    asignar() {
+      if (this.isProcesado()) {
+        for (let i = 0; i < this.tareas.length; i++) {
+          let tarea = this.tareas[i];
+          if (tarea.tamano < this.memoria && tarea.estado === 1) {
+            this.memorias.push(
+              new Memoria(
+                this.numBloque++,
+                tarea.tamano,
+                tarea.numero,
+                tarea.tiempo
+              )
+            );
+            tarea.estado = 2;
+            this.memoria = this.memoria - tarea.tamano;
+          }
+        }
+      } else {
+        for (let i = 0; i < this.tareas.length; i++) {
+          tarea = this.tareas[i];
+          if (tarea.tamano < this.memoria) {
+            this.memorias.push(
+              new Memoria(
+                this.numBloque++,
+                tarea.tamano,
+                tarea.numero,
+                tarea.tiempo
+              )
+            );
+            this.tarea.estado = 2;
+            this.memoria = this.memoria - this.tarea.tamano;
+            // this.mostrarTabla() // TODO pendiente
+            // this.mostrarTablasP(...) TODO pendiente
+          } else {
+            tarea.estado = 1;
+            // this.mostrarTabla() // TODO pendiente
+            // this.mostrarTablasP(...) TODO pendiente
+          }
+        }
+      }
+    }
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+isProcesado() {
+    let cont = 0;
+    for (let i = 0; i < this.tarea.length; i++) {
+      if (this.tarea[i].estado !== 0) {
+        cont++;
+      }
+    }
+    return cont === 25;
+  }
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    getTareaM(num){
         let cont=0;
-        for(let i= 0; i <this.tarea.lenght; i++)
-        {
-            if(this.numero() == num)
-            {
+        for(let i= 0; i <this.tarea.lenght; i++){
+            if(this.numero() === num){
                 return this.tarea[i];
             }
         }
         return null;
     }
-    }
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  }
 
