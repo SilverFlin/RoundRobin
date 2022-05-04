@@ -57,6 +57,17 @@ class Proceso
         }
     
   }
-  
+  getTareaM(num)
+    {
+        let cont=0;
+        for(let i= 0; i <this.tarea.lenght; i++)
+        {
+            if(this.numero() == num)
+            {
+                return this.tarea[i];
+            }
+        }
+        return null;
     }
-}
+    }
+
