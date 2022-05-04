@@ -49,11 +49,22 @@ class Proceso
         const tiempo =  [1,1,4,6,10,2,3,7,2,7,5,8,10,8,3,6,4,8,4,8,5,5,7,6,10];
         const tamano =  [760,3210,4190,5760,9350,1380,5950,2030,2550,420,3930,8940,6890,9140,220,6580,740,3610,6990,3820,3290,2710,7540,7540,8390];
         const tarea= [];
-        for(cont=0; cont<25; cont++)
+        for(let cont=0; cont<25; cont++)
         {
             tarea[cont] = new Tarea(cont+1, tiempo[cont], tamano[cont], 0);
         }
     
   }
-  
+  isProcesado()
+    {
+        cont=0;
+        for(Tarea var: tareas)
+        {
+            if(var.getEstado() != 0)
+            {
+                cont++;
+            }
+        }
+        return cont==25;
+    }
 }
