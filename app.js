@@ -2,7 +2,7 @@ class Memoria
 {
   
  
-  constructor( bloque,  tamaño,  proceso,  tiempo) 
+  constructor( bloque,tamaño,proceso,tiempo) 
   {
         this.bloque = bloque;
         this.tamaño = tamaño;
@@ -12,11 +12,13 @@ class Memoria
   }
   
 }
-class Memoria 
+class Tarea 
 {
-conastructor(numero,tiempo, tamano,estado) {
+conastructor(numero,tiempo,tamano,estado) 
+  {
         this.numero = numero;
         this.tiempo = tiempo;
         this.tamano = tamano;
         this.estado = estado;
     }
+}
