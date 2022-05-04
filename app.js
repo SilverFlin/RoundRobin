@@ -55,16 +55,6 @@ class Proceso
         }
     
   }
-  isProcesado()
-    {
-        cont=0;
-        for(Tarea var: tareas)
-        {
-            if(var.getEstado() != 0)
-            {
-                cont++;
-            }
-        }
-        return cont==25;
+  
     }
 }
