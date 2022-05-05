@@ -120,7 +120,7 @@ isProcesado() {
         {
             if(this.bloque() === num)
             {
-                return this.memorias[i];
+                return this.memorias;
             }
         }
         return null;
