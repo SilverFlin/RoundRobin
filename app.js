@@ -118,7 +118,7 @@ isProcesado() {
   getMemoriaT(num){
         for(let i= 0; i <this.memorias.lenght; i++)
         {
-            if(this.bloque() == num)
+            if(this.bloque() === num)
             {
                 return this.memorias[i];
             }
