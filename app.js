@@ -115,5 +115,15 @@ isProcesado() {
         return null;
     }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  getMemoriaT(num){
+        for(let i= 0; i <this.memoria.lenght; i++)
+        {
+            if(this.bloque() == num)
+            {
+                return this.memoria[i];
+            }
+        }
+        return null;
   }
-
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+}
