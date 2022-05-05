@@ -108,7 +108,7 @@ isProcesado() {
     getTareaM(num){
         let cont=0;
         for(let i= 0; i <this.tarea.lenght; i++){
-            if(this.numero() === num){
+            if(this.numero === num){
                 return this.tarea[i];
             }
         }
@@ -118,7 +118,7 @@ isProcesado() {
   getMemoriaT(num){
         for(let i= 0; i <this.memorias.lenght; i++)
         {
-            if(this.bloque() === num)
+            if(this.bloque === num)
             {
                 return this.memorias;
             }
