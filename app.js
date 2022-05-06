@@ -133,8 +133,8 @@ class Proceso {
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isTerminado() {
         let cont=0;
-        for(var of this.tareas) {
-            if(var.getEstado() === 3)
+        for(let tarea of this.tareas) {
+            if(tarea.getEstado() === 3)
             {
                 cont++;
             }
@@ -151,8 +151,8 @@ class Proceso {
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isAsignadoT() {
         let cont=0;
-        for(var of this.tareas){
-            if(var.estado === 2) {
+        for(let tarea of this.tareas){
+            if(tarea.estado === 2) {
                 cont++;
             }
         }
