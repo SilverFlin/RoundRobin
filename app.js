@@ -1,6 +1,7 @@
 //------------------Selectores----------------
 const taskTableDom = document.getElementById("taskTable");
 const memoryTableDom = document.getElementById("memoryTable");
+const procOrdTable = document.getElementById("procOrdTable");
 const listItem = document.createElement("li");
 
 const nextBtn = document.querySelector("#nextBtn");
@@ -40,9 +41,9 @@ class Tarea {
       case 0:
         return "";
       case 1:
-        return "En espera";
+        return "En Espera";
       case 2:
-        return "Asignado";
+        return "Ejecutando";
       case 3:
         return "Terminado";
     }
@@ -72,7 +73,7 @@ class Proceso {
         cont + 1,
         this.tiempo[cont],
         this.tamano[cont],
-        0
+        1
       );
     }
   }
@@ -81,7 +82,14 @@ class Proceso {
     if (this.isProcesado()) {
       for (let tarea of this.tareas) {
         if (tarea.tamano < this.memoria && tarea.estado === 1) {
-          this.memorias.push(new Memoria(this.numBloque++,tarea.tamano,tarea.numero,tarea.tiempo));
+          this.memorias.push(
+            new Memoria(
+              this.numBloque++,
+              tarea.tamano,
+              tarea.numero,
+              tarea.tiempo
+            )
+          );
           tarea.estado = 2;
           this.memoria = this.memoria - tarea.tamano;
         }
@@ -89,7 +97,14 @@ class Proceso {
     } else {
       for (let tarea of this.tareas) {
         if (tarea.tamano < this.memoria) {
-          this.memorias.push(new Memoria(this.numBloque++,tarea.tamano,tarea.numero,tarea.tiempo));
+          this.memorias.push(
+            new Memoria(
+              this.numBloque++,
+              tarea.tamano,
+              tarea.numero,
+              tarea.tiempo
+            )
+          );
           this.tareas.estado = 2;
           this.memoria = this.memoria - this.tareas.tamano;
           // this.mostrarTabla() // TODO pendiente
@@ -116,7 +131,7 @@ class Proceso {
   getTareaM(num) {
     for (let tarea of this.tareas) {
       if (tarea.numero === num) {
-        return tarea
+        return tarea;
       }
     }
     return null;
@@ -125,60 +140,89 @@ class Proceso {
   getMemoriaT(num) {
     for (let memoria of this.memorias) {
       if (memoria.bloque === num) {
-        return memoria
+        return memoria;
       }
     }
     return null;
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isTerminado() {
-        let cont=0;
-        for(let tarea of this.tareas) {
-            if(tarea.getEstado() === 3)
-            {
-                cont++;
-            }
-        }
-        return cont === 25;
+    let cont = 0;
+    for (let tarea of this.tareas) {
+      if (tarea.getEstado() === 3) {
+        cont++;
+      }
     }
+    return cont === 25;
+  }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   vueltaAt() {
-        let total = this.memorias.length-1;
-        for(let cont=0; cont<total; cont++) {
-            this.atender();
-        }
+    let total = this.memorias.length - 1;
+    for (let cont = 0; cont < total; cont++) {
+      this.atender();
     }
+  }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isAsignadoT() {
-        let cont=0;
-        for(let tarea of this.tareas){
-            if(tarea.estado === 2) {
-                cont++;
-            }
-        }
-        return cont === 25;
+    let cont = 0;
+    for (let tarea of this.tareas) {
+      if (tarea.estado === 2) {
+        cont++;
+      }
     }
+    return cont === 25;
+  }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  mostrarTabla() {
+    // Tabla de Trabajos & Tabla de Memoria
+    for (let cont = 0; cont < 25; cont++) {
+      const listItem = document.createElement("li");
+      listItem.style.textAlign = "center";
+      listItem.appendChild(
+        document.createTextNode(
+          `Proceso #${this.tareas[cont].numero}   |   ${
+            this.tareas[cont].tamano
+          } | ${this.tareas[cont].tiempo} | ${this.tareas[cont].getSEstado()}`
+        )
+      );
+      // Colores
+      if (this.tareas[cont].getSEstado() === "En Espera") {
+        taskTableDom
+          .appendChild(listItem)
+          .classList.add("list-group-item", "list-group-item-danger");
+      } else if (this.tareas[cont].getSEstado() === "Ejecutando") {
+        taskTableDom
+          .appendChild(listItem)
+          .classList.add("list-group-item", "list-group-item-warning");
+      } else if (this.tareas[cont].getSEstado() === "Terminado") {
+        taskTableDom
+          .appendChild(listItem)
+          .classList.add("list-group-item", "list-group-item-success");
+      }
+    }
+  }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  clearTables() {
+    while (taskTableDom.firstChild) {
+      taskTableDom.removeChild(taskTableDom.firstChild);
+    }
+    while (memoryTableDom.firstChild) {
+      memoryTableDom.removeChild(memoryTableDom.firstChild);
+    }
+  }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
 
+//------------------Ejecutar----------------
+let proceso = new Proceso();
 
 //------------------Botones----------------
-startBtn.addEventListener("click", () => {
-
-});
+startBtn.addEventListener("click", () => {});
 //next
-nextBtn.addEventListener("click", () => {
-
-});
+nextBtn.addEventListener("click", () => {});
 //reset
-fullBtn.addEventListener("click", () => {
+fullBtn.addEventListener("click", () => {});
 
-});
+autoBtn.addEventListener("click", () => {});
 
-autoBtn.addEventListener("click", () => {
-
-});
-
-resetBtn.addEventListener("click", () => {
-
-});
+resetBtn.addEventListener("click", () => {});
