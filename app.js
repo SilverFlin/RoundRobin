@@ -160,3 +160,25 @@ class Proceso {
     }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
+
+
+//------------------Botones----------------
+startBtn.addEventListener("click", () => {
+
+});
+//next
+nextBtn.addEventListener("click", () => {
+
+});
+//reset
+fullBtn.addEventListener("click", () => {
+
+});
+
+autoBtn.addEventListener("click", () => {
+
+});
+
+resetBtn.addEventListener("click", () => {
+
+});
