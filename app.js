@@ -122,4 +122,11 @@ class Proceso {
         return cont === 25;
     }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  vueltaAt() {
+        let total = this.memorias.length-1;
+        for(let cont=0; cont<total; cont++) {
+            this.atender();
+        }
+    }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
