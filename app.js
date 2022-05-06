@@ -1,3 +1,16 @@
+//------------------Selectores----------------
+const taskTableDom = document.getElementById("taskTable");
+const memoryTableDom = document.getElementById("memoryTable");
+const listItem = document.createElement("li");
+const nextBtn = document.querySelector("#nextBtn");
+const startBtn = document.querySelector("#startBtn");
+const fullBtn = document.querySelector("#fullBtn");
+const resetBtn = document.querySelector("#resetBtn");
+const autoBtn = document.querySelector("#autoBtn");
+const stopAutoBtn = document.querySelector("#stopAutoBtn");
+const memoryBar = document.querySelector("#memoryBar");
+const memoryQty = document.querySelector("#memoryQty");
+// ---------------------------------------------
 class Memoria {
   constructor(bloque, tamaño, proceso, tiempo) {
     this.bloque = bloque;
