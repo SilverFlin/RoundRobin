@@ -13,14 +13,20 @@
 
 <body>
 
-    <h1>Tablas de Memoria v2 - Luis Angel Toledo Russo :]</h1>
-    <h2>hola c:</h2>
+    <h1>Round Robin</h1>
+
     <div class="container">
         <div class="row align-items-start">
             <div class="col">
-                <ol id="taskTable" class="list-group col-8">
-                    <!--JS task tables-->
-                </ol>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        Tabla de Tareas
+                    </div>
+                    <ol id="taskTable" class="list-group  list-group-flush">
+                        <!--JS task tables-->
+                    </ol>
+                </div>
+
             </div>
             <div class="col">
                 <div class="d-flex justify-content-between">
@@ -33,52 +39,67 @@
 
                 </div>
                 <br>
-                <button id="resetBtn" type="button" class="btn btn-danger btn-lg">Reiniciar</button>
-                <img src="./Ranita.gif" alt="" class="img-fluid">
-
-            </div>
-            <div class="col">
-                <ol id="memoryTable" class="list-group col-12">
-                    <!--JS memory tables-->
-                </ol>
-
-                <!-- Memory -->
-
+                <hr>
                 <br>
                 <h3 id="memoryQty">Memoria Actual</h3>
                 <div class="progress">
                     <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"
                         id="memoryBar"></div>
                 </div>
-
-
-
-
-
-
-                <!-- <div class="progress">
-                <div class="progress-bar bg-success" role="progressbar" style="width: 39%" aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
+                <br>
+                <hr>
+                <br>
+                <div class="cardDiv">
+                    <div class="card" style="width: 100%;">
+                        <div class="card-header">
+                            <h4>Procesador <span class="badge alert-primary">QUANTUM: 5</span></h4>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Atendiendo: <var id="atendiendo">Proceso 1</var> </li>
+                            <li class="list-group-item">Siguiente: <var id="siguente">Proceso 3</var></li>
+                            <li class="list-group-item ">Guardando Contexto:<var id="guardandoContexto">Proceso 4</var>
+                            </li>
+                            <li class="list-group-item">Cargando Contexto:<var id="cargandoContexto">Proceso 4</var>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="progress">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+
+                <br>
+                <hr>
+                <br>
+
+                <div class="card" style="width: 100%;">
+                    <div class="card-header">
+                        Tabla Procesos Ordenados
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-warning">Proceso #1 | 2710 | En Espera</li>
+                        <li class="list-group-item bg-warning">Proceso #1 | 2710 | En Espera</li>
+                        <li class="list-group-item bg-warning">Proceso #1 | 2710 | En Espera</li>
+                        <li class="list-group-item bg-warning">Proceso #1 | 2710 | En Espera</var>
+                        </li>
+                    </ul>
                 </div>
-                <div class="progress">
-                <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                <br>
+                <button id="resetBtn" type="button" class="btn btn-danger btn-lg">Reiniciar</button>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        Tabla de Tareas
+                    </div>
+                    <ol id="memoryTable" class="list-group col-12">
+                        <!--JS memory tables-->
+                    </ol>
                 </div>
-                <div class="progress">
-                <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div> -->
+
+                <!-- Memory -->
 
             </div>
         </div>
 
-
-
-
-
-
-
-        <script src="app.js"></script>
+        <script src="sadas.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
             integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
             crossorigin="anonymous"></script>
