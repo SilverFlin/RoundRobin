@@ -320,12 +320,12 @@ class Proceso {
         listItem.classList.add("d-flex","justify-content-between","align-items-start");
         divContent.classList.add("ms-2", "me-auto");
         divHeading.classList.add("fw-bold");
-        timeBadge.classList.add("badge", "bg-primary", "rounded-pill");
+        timeBadge.classList.add("badge", "bg-danger", "rounded-pill");
 
         divHeading.appendChild(document.createTextNode(`Tamaño: ${mem.tamaño}`));
         divContent.appendChild(divHeading);
         divContent.appendChild(document.createTextNode(`Bloque: ${mem.bloque} Proceso: ${mem.proceso}`));
-        timeBadge.appendChild(document.createTextNode(`${mem.tiempo}s`));
+        timeBadge.appendChild(document.createTextNode(`${mem.tiempo-5}s`));
         listItem.appendChild(divContent);
         listItem.appendChild(timeBadge);
 
