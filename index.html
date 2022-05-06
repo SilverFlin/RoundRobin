@@ -22,7 +22,7 @@
                     <div class="card-header">
                         Tabla de Tareas
                     </div>
-                    <ol id="taskTable" class="list-group  list-group-flush">
+                    <ol id="taskTable" class="list-group  list-group-numbered">
                         <!--JS task tables-->
                     </ol>
                 </div>
@@ -54,12 +54,12 @@
                         <div class="card-header">
                             <h4>Procesador <span class="badge alert-primary">QUANTUM: 5</span></h4>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Atendiendo: <var id="atendiendo">Proceso 1</var> </li>
-                            <li class="list-group-item">Siguiente: <var id="siguente">Proceso 3</var></li>
-                            <li class="list-group-item ">Guardando Contexto:<var id="guardandoContexto">Proceso 4</var>
+                        <ul id="procesadorTable" class="list-group list-group-flush">
+                            <li class="list-group-item">Atendiendo: <var id="atendiendo"></var> </li>
+                            <li class="list-group-item">Siguiente: <var id="siguente"></var></li>
+                            <li class="list-group-item ">Guardando Contexto:<var id="guardandoContexto"></var>
                             </li>
-                            <li class="list-group-item">Cargando Contexto:<var id="cargandoContexto">Proceso 4</var>
+                            <li class="list-group-item">Cargando Contexto:<var id="cargandoContexto"></var>
                             </li>
                         </ul>
                     </div>
@@ -92,6 +92,12 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
+
 
         <script src="app.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
