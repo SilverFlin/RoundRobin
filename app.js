@@ -146,6 +146,62 @@ class Proceso {
     return null;
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  atender(){
+    if(this.empi >= this.memorias.length || empi < 0){
+        this.empi = 0;
+    }
+    var bloque = memorias.get(this.empi).getBloque();
+
+    if (isProcesado()) {
+        if (this.memorias.get(empi).getTiempo()<= this.QUANTUM && !this.mmemorias.contains(memorias.get(empi))) {
+            if (getTareaM(memorias.get(this.empi).getProceso())!= null) {
+                getTareaM(memorias.get(this.empi).getProceso()).setEstado(3);
+                this.memoria += this.memorias.get(this.empi).getTamaño();
+                this.mostrarTabla();
+                //this.mostrarTablasP(bloque, "", "");
+                this.empi-= 1;
+                this.asignar(); 
+                //this.mostrarTabla();
+                //this.mostrarTablasP(bloque, "", "");
+            }
+            this.empi++;
+        }
+        else if (this.mmemorias.contains(memorias.get(empi))) {
+            let mem = memorias.get(empi);
+                mem.setTiempo(memorias.get(this.empi).getTiempo()-QUANTUM);
+                this.memorias.set(this.empi, mem);
+                //this.mostrarTabla();
+                //this.mostrarTablasP(memorias.get(empi).getBloque(), "", ""+memorias.get(empi).getBloque());
+            if (this.memorias.get(empi).getTiempo() <= this.QUANTUM) {
+                this.getTareaM(this.memorias.get(this.empi).getProceso()).setEstado(3);
+                this.memoria += this.memorias.get(this.empi).getTamaño();
+                //this.mostrarTabla();
+                //this.mostrarTablasP(bloque, "", "");
+                this.memorias.remove(this.empi);
+                this.mmemorias.remove(this.empi);
+                this.empi-= 1;
+
+                if (!isAsignadoT()) {
+                    this.asignar();
+                    //this.mostrarTabla();
+                    //this.mostrarTablasP(bloque, "", "");
+                }
+            }
+            this.empi++;
+        }
+        else if (this.memorias.get(this.empi).getTiempo() > this.QUANTUM && !this.mmemorias.contains(this.memorias.get(this.empi))) {
+            this.mmemorias.add(this.memorias.get(this.empi).getBloque());
+            var contexto = ""+this.memorias.get(this.empi).getBloque();
+            //this.mostrarTabla();
+            //this.mostrarTablasP(bloque, "", "");
+
+            this.empi++;
+        }
+    }
+
+
+ }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isTerminado() {
     let cont = 0;
     for (let tarea of this.tareas) {
