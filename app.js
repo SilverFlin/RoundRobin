@@ -129,4 +129,14 @@ class Proceso {
         }
     }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  isAsignadoT() {
+        let cont=0;
+        for(var of this.tareas){
+            if(var.estado === 2) {
+                cont++;
+            }
+        }
+        return cont === 25;
+    }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
