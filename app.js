@@ -175,16 +175,77 @@ class Proceso {
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   mostrarTabla() {
     // Tabla de Trabajos & Tabla de Memoria
+    this.clearTables();
+    this.tablaTareasDOM();
+    this.tablaProcesosDOM();
+    this.memoriaDOM();
+  }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  clearTables() {
+    while (taskTableDom.firstChild) {
+      taskTableDom.removeChild(taskTableDom.firstChild);
+    }
+    while (memoryTableDom.firstChild) {
+      memoryTableDom.removeChild(memoryTableDom.firstChild);
+    }
+  }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    clearTables() {
+    while (taskTableDom.firstChild) {
+      taskTableDom.removeChild(taskTableDom.firstChild);
+    }
+    while (memoryTableDom.firstChild) {
+      memoryTableDom.removeChild(memoryTableDom.firstChild);
+    }
+  }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    memoriaDOM() {
+    const memoryPercentage = (100 * this.memoria) / 50000;
+    let colorMemoryBar = "progress-bar bg-success";
+    if (memoryPercentage >= 75) {
+      colorMemoryBar = "progress-bar bg-success";
+    } else if (memoryPercentage >= 50) {
+      colorMemoryBar = "progress-bar bg-info";
+    } else if (memoryPercentage >= 25) {
+      colorMemoryBar = "progress-bar bg-warning";
+    } else {
+      colorMemoryBar = "progress-bar bg-danger";
+    }
+    memoryBar.className = `${colorMemoryBar}`;
+    memoryBar.style = `width: ${memoryPercentage}%`;
+    memoryBar.ariaValueNow = `${Math.round(memoryPercentage)}`;
+    memoryQty.innerHTML = `Memoria Actual ${memoryPercentage}% [${this.memoria}/50000]`;
+  }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    tablaTareasDOM() {
     for (let cont = 0; cont < 25; cont++) {
       const listItem = document.createElement("li");
+      const divHeading = document.createElement("div");
+      const divContent = document.createElement("div");
+      const timeBadge = document.createElement("span");
       listItem.style.textAlign = "center";
-      listItem.appendChild(
-        document.createTextNode(
-          `Proceso #${this.tareas[cont].numero}   |   ${
-            this.tareas[cont].tamano
-          } | ${this.tareas[cont].tiempo} | ${this.tareas[cont].getSEstado()}`
-        )
+      listItem.classList.add(
+        "d-flex",
+        "justify-content-between",
+        "align-items-start"
       );
+      divContent.classList.add("ms-2", "me-auto");
+      divHeading.classList.add("fw-bold");
+      timeBadge.classList.add("badge", "bg-primary", "rounded-pill");
+
+      divHeading.appendChild(
+        document.createTextNode(`Tamaño: ${this.tareas[cont].tamano}`)
+      );
+      divContent.appendChild(divHeading);
+      divContent.appendChild(
+        document.createTextNode(`Estado: ${this.tareas[cont].getSEstado()}`)
+      );
+      timeBadge.appendChild(
+        document.createTextNode(`${this.tareas[cont].tiempo}s`)
+      );
+      listItem.appendChild(divContent);
+      listItem.appendChild(timeBadge);
+
       // Colores
       if (this.tareas[cont].getSEstado() === "En Espera") {
         taskTableDom
@@ -202,24 +263,69 @@ class Proceso {
     }
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  clearTables() {
-    while (taskTableDom.firstChild) {
-      taskTableDom.removeChild(taskTableDom.firstChild);
+  tablaProcesosDOM() {
+    // if (this.memorias[0]) {
+    if (this.mmemorias[0] === undefined) {
+      // Genera tabla de memoria vacia
+      const listItem = document.createElement("li");
+      listItem.appendChild(document.createTextNode(` ~ [Vacio] ~`));
+      memoryTableDom
+        .appendChild(listItem)
+        .classList.add("list-group-item", "list-group-item-success");
+      listItem.style.textAlign = "center";
+    } else {
+      for (const memoria of this.mmemorias) {
+        const listItem = document.createElement("li");
+        const divHeading = document.createElement("div");
+        const divContent = document.createElement("div");
+        const timeBadge = document.createElement("span");
+        listItem.style.textAlign = "center";
+        listItem.classList.add(
+          "d-flex",
+          "justify-content-between",
+          "align-items-start"
+        );
+        divContent.classList.add("ms-2", "me-auto");
+        divHeading.classList.add("fw-bold");
+        timeBadge.classList.add("badge", "bg-primary", "rounded-pill");
+
+        divHeading.appendChild(
+          document.createTextNode(`Tamaño: ${memoria.tamaño}`)
+        );
+        divContent.appendChild(divHeading);
+        divContent.appendChild(
+          document.createTextNode(
+            `Bloque: ${memoria.bloque} Proceso: ${memoria.proceso}`
+          )
+        );
+        timeBadge.appendChild(document.createTextNode(`${memoria.tiempo}s`));
+        listItem.appendChild(divContent);
+        listItem.appendChild(timeBadge);
+
+        console.log(memoria);
+        memoryTableDom
+          .appendChild(listItem)
+          .classList.add("list-group-item", "list-group-item-success");
+      }
     }
-    while (memoryTableDom.firstChild) {
-      memoryTableDom.removeChild(memoryTableDom.firstChild);
-    }
+    // }
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 }
 
 //------------------Ejecutar----------------
 let proceso = new Proceso();
 
 //------------------Botones----------------
-startBtn.addEventListener("click", () => {});
+startBtn.addEventListener("click", () => {
+    proceso.mostrarTabla();
+});
 //next
-nextBtn.addEventListener("click", () => {});
+nextBtn.addEventListener("click", () => {
+    proceso.clearTables();
+});
 //reset
 fullBtn.addEventListener("click", () => {});
 
