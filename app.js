@@ -136,6 +136,7 @@ class Proceso {
           this.memoria = this.memoria + this.memorias[this.empi].tamaño;
           this.mostrarTabla();
           this.mostrarTablasP(bloque, "", "");
+          this.memorias.splice(this.empi, 1);
           this.empi = this.empi - 1;
           this.asignar();
           this.mostrarTabla();
