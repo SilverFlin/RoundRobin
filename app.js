@@ -111,4 +111,15 @@ class Proceso {
     return null;
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  isTerminado() {
+        let cont=0;
+        for(var of this.tareas) {
+            if(var.getEstado() === 3)
+            {
+                cont++;
+            }
+        }
+        return cont === 25;
+    }
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }
