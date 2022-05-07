@@ -359,13 +359,12 @@ class Proceso {
 let proceso = new Proceso();
 // proceso.mmemorias.push(new Memoria(1, 500, 1, 5));
 const iniciar = () => {
-  do {
+
     if (!proceso.isProcesado()) {
       proceso.asignar();
     } else {
       proceso.atender();
     }
-  } while (!proceso.isTerminado);
 };
 
 //------------------Botones----------------
