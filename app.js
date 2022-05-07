@@ -1,3 +1,4 @@
+let tracker = 0;
 //------------------Selectores----------------
 const taskTableDom = document.getElementById("taskTable");
 const memoryTableDom = document.getElementById("memoryTable");
@@ -40,7 +41,7 @@ class Tarea {
   getSEstado() {
     switch (this.estado) {
       case 0:
-        return "";
+        return "En Espera";
       case 1:
         return "En Espera";
       case 2:
@@ -60,8 +61,8 @@ class Proceso {
   mmemorias = [];
   tareas = [];
   constructor() {
-    let tiempo = [1, 1, 4, 6, 10, 2, 3, 7, 2, 7, 5, 8, 10, 8, 3, 6, 4, 8, 4, 8, 5, 5, 7, 6,10,];
-    let tamano = [760, 3210, 4190, 5760, 9350, 1380, 5950, 2030, 2550, 420, 3930, 8940,6890, 9140, 220, 6580, 740, 3610, 6990, 3820, 3290, 2710, 7540, 7540,8390,];
+    let tiempo = [1, 1, 4, 6, 10, 2, 3, 7, 2, 7, 5, 8, 10, 8, 3, 6, 4, 8, 4, 8, 5, 5, 7, 6,10];
+    let tamano = [760, 3210, 4190, 5760, 9350, 1380, 5950, 2030, 2550, 420, 3930, 8940,6890, 9140, 220, 6580, 740, 3610, 6990, 3820, 3290, 2710, 7540, 7540,8390];
     for (let cont = 0; cont < 25; cont++) {
       this.tareas[cont] = new Tarea(cont + 1, tiempo[cont], tamano[cont], 0);
     }
@@ -77,47 +78,41 @@ class Proceso {
         }
       }
     } else {
-      for (let tarea of this.tareas) {
-        if (tarea.tamano < this.memoria) {
-          this.memorias.push(new Memoria(this.numBloque++,tarea.tamano,tarea.numero,tarea.tiempo));
-          tarea.estado = 2;
-          this.memoria = this.memoria - tarea.tamano;
-          this.mostrarTabla();
+      if (tracker === 25) tracker = 0;
+      for (let i = tracker; i < tracker + 1; i++) {
+        let tarea = this.tareas;
+        if (tarea[i].tamano < this.memoria) {
+          this.memorias.push(new Memoria(this.numBloque++,tarea[i].tamano,tarea[i].numero,tarea[i].tiempo));
+          tarea[i].estado = 2;
+          this.memoria = this.memoria - tarea[i].tamano;
           this.mostrarTablasP(this.memorias[this.empi].bloque, "", "");
         } else {
-          tarea.estado = 1;
-          this.mostrarTabla();
+          tarea[i].estado = 1;
           this.mostrarTablasP(this.memorias[this.empi].bloque, "", "");
         }
       }
+      tracker++;
     }
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isProcesado() {
     let cont = 0;
     for (let tarea of this.tareas) {
-      // console.log(cont);
-      if (tarea.estado !== 0) {
-        cont++;
-      }
+      if (tarea.estado !== 0) cont++;
     }
     return cont === 25;
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   getTareaM(num) {
     for (let tarea of this.tareas) {
-      if (tarea.numero === num) {
-        return tarea;
-      }
+      if (tarea.numero === num) return tarea;
     }
     return null;
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   getMemoriaT(num) {
     for (let mem of this.memorias) {
-      if (mem.bloque === num) {
-        return mem;
-      }
+      if (mem.bloque === num)return mem;
     }
     return null;
   }
@@ -129,17 +124,14 @@ class Proceso {
     let bloque = this.memorias[this.empi].bloque;
 
     if (this.isProcesado()) {
-      if (this.memorias[this.empi].tiempo <= this.QUANTUM && !this.mmemorias.includes(this.memorias[this.empi])) {
+      if (this.memorias[this.empi].tiempo <= this.QUANTUM &&!this.mmemorias.includes(this.memorias[this.empi])) {
         if (this.getTareaM(this.memorias[this.empi].proceso) !== null) {
-          //console.log("3");
           this.getTareaM(this.memorias[this.empi].proceso).estado = 3;
           this.memoria = this.memoria + this.memorias[this.empi].tamaño;
-          this.mostrarTabla();
           this.mostrarTablasP(bloque, "", "");
           this.memorias.splice(this.empi, 1);
           this.empi = this.empi - 1;
           this.asignar();
-          this.mostrarTabla();
           this.mostrarTablasP(bloque, "", "");
         }
         this.empi++;
@@ -147,20 +139,16 @@ class Proceso {
         let mem = this.memorias[this.empi];
         mem.tiempo = this.memorias[this.empi].tiempo - this.QUANTUM;
         this.memorias[this.empi] = mem;
-        this.mostrarTabla();
         this.mostrarTablasP(this.memorias[this.empi].bloque,"",this.memorias[this.empi].bloque);
         if (this.memorias[this.empi].tiempo <= this.QUANTUM) {
           this.getTareaM(this.memorias[this.empi].proceso).estado = 3;
           this.memoria = this.memoria + this.memorias[this.empi].tamaño;
-          this.mostrarTabla();
           this.mostrarTablasP(bloque, "", "");
           this.memorias.splice(this.empi, 1);
           this.mmemorias.splice(this.empi, 1);
           this.empi -= 1;
-
           if (!this.isAsignadoT()) {
             this.asignar();
-            this.mostrarTabla();
             this.mostrarTablasP(bloque, "", "");
           }
         }
@@ -168,19 +156,17 @@ class Proceso {
       } else if (this.memorias[this.empi].tiempo > this.QUANTUM &&!this.mmemorias.includes(this.memorias[this.empi])) {
         this.mmemorias.push(this.memorias[this.empi]);
         let contexto = this.memorias[this.empi].bloque;
-        this.mostrarTabla();
         this.mostrarTablasP(bloque, contexto, "");
         this.empi++;
       }
+      tracker++;
     }
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isTerminado() {
     let cont = 0;
     for (let tarea of this.tareas) {
-      if (tarea.getEstado() === 3) {
-        cont++;
-      }
+      if (tarea.estado === 3)cont++;
     }
     return cont === 25;
   }
@@ -195,9 +181,7 @@ class Proceso {
   isAsignadoT() {
     let cont = 0;
     for (let tarea of this.tareas) {
-      if (tarea.estado === 2) {
-        cont++;
-      }
+      if (tarea.estado === 2) cont++;
     }
     return cont === 25;
   }
@@ -209,6 +193,7 @@ class Proceso {
     this.tablaProcesosDOM();
     this.tablaProcesosOrdenadosDOM();
     this.memoriaDOM();
+    taskTableDom.children[tracker].style.backgroundColor = "#79edec";
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   clearTables() {
@@ -260,6 +245,7 @@ class Proceso {
       listItem.appendChild(divContent);
       listItem.appendChild(timeBadge);
 
+      // Colores
       if (this.tareas[cont].getSEstado() === "En Espera") {
         taskTableDom.appendChild(listItem).classList.add("list-group-item", "list-group-item-danger");
       } else if (this.tareas[cont].getSEstado() === "Ejecutando") {
@@ -276,7 +262,8 @@ class Proceso {
       // Genera tabla de memoria vacia
       const listItem = document.createElement("li");
       listItem.appendChild(document.createTextNode(` ~ [Vacio] ~`));
-      memoryTableDom.appendChild(listItem).classList.add("list-group-item", "list-group-item-success");
+      memoryTableDom.appendChild(listItem)
+        .classList.add("list-group-item", "list-group-item-success");
       listItem.style.textAlign = "center";
     } else {
       for (const mem of this.memorias) {
@@ -285,22 +272,41 @@ class Proceso {
         const divContent = document.createElement("div");
         const timeBadge = document.createElement("span");
         listItem.style.textAlign = "center";
-        listItem.classList.add("d-flex","justify-content-between","align-items-start");
+        listItem.classList.add(
+          "d-flex",
+          "justify-content-between",
+          "align-items-start"
+        );
         divContent.classList.add("ms-2", "me-auto");
         divHeading.classList.add("fw-bold");
         timeBadge.classList.add("badge", "bg-primary", "rounded-pill");
 
-        divHeading.appendChild(document.createTextNode(`Tamaño: ${mem.tamaño}`));
+        divHeading.appendChild(
+          document.createTextNode(`Tamaño: ${mem.tamaño}`)
+        );
         divContent.appendChild(divHeading);
-        divContent.appendChild(document.createTextNode(`Bloque: ${mem.bloque} Proceso: ${mem.proceso}`));
+        divContent.appendChild(
+          document.createTextNode(
+            `Bloque: ${mem.bloque} Proceso: ${mem.proceso}`
+          )
+        );
         timeBadge.appendChild(document.createTextNode(`${mem.tiempo}s`));
         listItem.appendChild(divContent);
         listItem.appendChild(timeBadge);
 
-
-        memoryTableDom.appendChild(listItem).classList.add("list-group-item", "list-group-item-success");
+        // listItem.appendChild(
+        //   document.createTextNode(
+        //     `Bloque No. ${mem.bloque} | Proceso #${mem.proceso} | Espacio ${mem.tamaño} | ${memoria.tiempo}s`
+        //   )
+        // );
+        // this.memoria -= this.memorias[memoria.numero].tamano;
+        // console.log(mem);
+        memoryTableDom
+          .appendChild(listItem)
+          .classList.add("list-group-item", "list-group-item-success");
       }
     }
+    // }
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   tablaProcesosOrdenadosDOM() {
@@ -321,11 +327,10 @@ class Proceso {
         divContent.classList.add("ms-2", "me-auto");
         divHeading.classList.add("fw-bold");
         timeBadge.classList.add("badge", "bg-danger", "rounded-pill");
-
         divHeading.appendChild(document.createTextNode(`Tamaño: ${mem.tamaño}`));
         divContent.appendChild(divHeading);
         divContent.appendChild(document.createTextNode(`Bloque: ${mem.bloque} Proceso: ${mem.proceso}`));
-        timeBadge.appendChild(document.createTextNode(`${mem.tiempo-5}s`));
+        timeBadge.appendChild(document.createTextNode(`${mem.tiempo - 5}s`));
         listItem.appendChild(divContent);
         listItem.appendChild(timeBadge);
 
@@ -336,13 +341,11 @@ class Proceso {
   mostrarTablasP(enBloque, a, b) {
     // -------Procesador-----
     let sig = "";
-    if (this.isProcesado()) {
+    if (!this.isProcesado() || this.memorias[0] === undefined) {
+    } else {
       if (this.memorias.length !== 1 && this.empi < this.memorias.length - 1) {
         sig = this.memorias[this.empi + 1].bloque;
-      } else if (
-        this.memorias.length !== 1 &&
-        this.empi === this.memorias.length - 1
-      ) {
+      } else if (this.memorias.length !== 1 &&this.empi === this.memorias.length - 1) {
         sig = this.memorias[0].bloque;
       }
 
@@ -357,28 +360,67 @@ class Proceso {
 
 //------------------Ejecutar----------------
 let proceso = new Proceso();
-// proceso.mmemorias.push(new Memoria(1, 500, 1, 5));
-const iniciar = () => {
+proceso.mostrarTabla();
 
-    if (!proceso.isProcesado()) {
-      proceso.asignar();
-    } else {
-      proceso.atender();
-    }
+const iniciar = () => {
+  if (!proceso.isProcesado()) {
+    proceso.asignar();
+  } else {
+    proceso.atender();
+  }
+  if (tracker === 25) tracker = 0;
 };
 
 //------------------Botones----------------
+resetBtn.hidden = true;
+stopAutoBtn.hidden = true;
+
 startBtn.addEventListener("click", () => {
   iniciar();
+  proceso.mostrarTabla();
+  resetBtn.hidden = false;
 });
 //next
 nextBtn.addEventListener("click", () => {
-  proceso.clearTables();
+  for (let i = 0; i < 5; i++) {
+    iniciar();
+    proceso.mostrarTabla();
+  }
 });
 //reset
-fullBtn.addEventListener("click", () => {});
+fullBtn.addEventListener("click", () => {
+  for (let i = 0; i < 25; i++) {
+    iniciar();
+    proceso.mostrarTabla();
+  }
+});
 
-autoBtn.addEventListener("click", () => {});
+resetBtn.addEventListener("click", () => {
+  proceso.clearTables();
+  proceso = new Proceso();
+  proceso.mostrarTabla();
+});
 
-resetBtn.addEventListener("click", () => {});
-//proceso.memorias.push(new Memoria(1,500,tarea.numero,tarea.tiempo));
+autoBtn.addEventListener("click", () => {
+  try {
+    if (proceso.isTerminado()) {
+      alert("No quedan más trabajos");
+    } else {
+      const idAuto = setInterval(() => {
+        iniciar();
+        proceso.mostrarTabla();
+      }, 300);
+      resetBtn.hidden = false;
+      stopAutoBtn.hidden = false;
+      autoBtn.hidden = true;
+      stopAutoBtn.addEventListener("click", () => {
+        clearInterval(idAuto);
+
+        stopAutoBtn.hidden = true;
+        autoBtn.hidden = false;
+      });
+    }
+  } catch (e) {
+    console.log("Trabajos Finalizados");
+  }
+});
