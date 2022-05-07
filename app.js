@@ -399,6 +399,7 @@ resetBtn.addEventListener("click", () => {
   proceso.clearTables();
   proceso = new Proceso();
   proceso.mostrarTabla();
+  tracker=0
 });
 
 autoBtn.addEventListener("click", () => {
