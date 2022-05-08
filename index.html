@@ -12,87 +12,88 @@
 </head>
 
 <body>
+    <div class="bg-image" style="background-image: url('https://c.tenor.com/qhZUzWdQLX8AAAAM/chinese-tom-tom-and-jerry.gif');
+            height: 100vh; background-repeat: repeat;">
+        <h1 class="text-white">Round Robin</h1>
 
-    <h1>Round Robin</h1>
-
-    <div class="container">
-        <div class="row align-items-start">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-header">
-                        <h4>Tabla de Tareas</h4>
+        <div class="container">
+            <div class="row align-items-start">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                            <h4>Tabla de Tareas</h4>
+                        </div>
+                        <ol id="taskTable" class="list-group  list-group-numbered">
+                            <!--JS task tables-->
+                        </ol>
                     </div>
-                    <ol id="taskTable" class="list-group  list-group-numbered">
-                        <!--JS task tables-->
-                    </ol>
-                </div>
-
-            </div>
-            <div class="col">
-                <div class="d-flex justify-content-between">
-                    <button id="startBtn" type="button" class="btn btn-primary btn-lg">Acción</button>
-                    <button id="nextBtn" type="button" class="btn btn-primary btn-lg">Acción [5]</button>
-                    <button id="fullBtn" type="button" class="btn btn-primary btn-lg">Acción [25]</button>
-                    <button id="autoBtn" type="button" class="btn btn-info btn-lg">Automatico</button>
-                    <button id="stopAutoBtn" type="button" class="btn btn-danger btn-lg">Parar</button>
-
 
                 </div>
-                <br>
-                <hr>
-                <br>
-                <h3 id="memoryQty">Memoria Actual</h3>
-                <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                        id="memoryBar"></div>
-                </div>
-                <br>
-                <hr>
-                <br>
-                <div class="cardDiv">
+                <div class="col">
+                    <div class="d-flex justify-content-between">
+                        <button id="startBtn" type="button" class="btn btn-primary btn-lg">Acción</button>
+                        <button id="nextBtn" type="button" class="btn btn-primary btn-lg">Acción [5]</button>
+                        <button id="fullBtn" type="button" class="btn btn-primary btn-lg">Acción [25]</button>
+                        <button id="autoBtn" type="button" class="btn btn-info btn-lg">Automatico</button>
+                        <button id="stopAutoBtn" type="button" class="btn btn-danger btn-lg">Parar</button>
+
+
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <h3 id="memoryQty" class="text-white">Memoria Actual</h3>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                            id="memoryBar"></div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="cardDiv">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-header">
+                                <h4>Procesador <span class="badge alert-primary">QUANTUM: 5</span></h4>
+                            </div>
+                            <ul id="procesadorTable" class="list-group list-group-flush">
+                                <li class="list-group-item">Atendiendo: <var id="atendiendo"></var> </li>
+                                <li class="list-group-item">Siguiente: <var id="siguente"></var></li>
+                                <li class="list-group-item ">Guardando Contexto:<var id="guardandoContexto"></var>
+                                </li>
+                                <li class="list-group-item">Cargando Contexto:<var id="cargandoContexto"></var>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <br>
+                    <hr>
+                    <br>
+
                     <div class="card" style="width: 100%;">
                         <div class="card-header">
-                            <h4>Procesador <span class="badge alert-primary">QUANTUM: 5</span></h4>
+                           <h4>Tabla Procesos Ordenados</h4>
                         </div>
-                        <ul id="procesadorTable" class="list-group list-group-flush">
-                            <li class="list-group-item">Atendiendo: <var id="atendiendo"></var> </li>
-                            <li class="list-group-item">Siguiente: <var id="siguente"></var></li>
-                            <li class="list-group-item ">Guardando Contexto:<var id="guardandoContexto"></var>
-                            </li>
-                            <li class="list-group-item">Cargando Contexto:<var id="cargandoContexto"></var>
-                            </li>
-                        </ul>
+                        <ol id="procOrdTable" class="list-group  list-group-flush">
+                            <!--JS Procesos ordenados-->
+                        </ol>
                     </div>
+                    <br>
+                    <button id="resetBtn" type="button" class="btn btn-danger btn-lg">Reiniciar</button>
+
                 </div>
-
-                <br>
-                <hr>
-                <br>
-
-                <div class="card" style="width: 100%;">
-                    <div class="card-header">
-                       <h4>Tabla Procesos Ordenados</h4>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                           <h4> Tabla de Memoria</h4>
+                        </div>
+                        <ol id="memoryTable" class="list-group col-12">
+                            <!--JS memory tables-->
+                        </ol>
                     </div>
-                    <ol id="procOrdTable" class="list-group  list-group-flush">
-                        <!--JS Procesos ordenados-->
-                    </ol>
-                </div>
-                <br>
-                <button id="resetBtn" type="button" class="btn btn-danger btn-lg">Reiniciar</button>
-
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-header">
-                       <h4> Tabla de Memoria</h4>
-                    </div>
-                    <ol id="memoryTable" class="list-group col-12">
-                        <!--JS memory tables-->
-                    </ol>
                 </div>
             </div>
         </div>
-
 
 
 
