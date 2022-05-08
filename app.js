@@ -21,6 +21,9 @@ const atendiendo = document.getElementById("atendiendo");
 const siguente = document.getElementById("siguente");
 const guardandoContexto = document.getElementById("guardandoContexto");
 const cargandoContexto = document.getElementById("cargandoContexto");
+
+const whiteBlack = document.getElementById("whiteBlack");
+
 // ---------------------------------------------
 class Memoria {
   constructor(bloque, tamaño, proceso, tiempo) {
@@ -424,12 +427,16 @@ autoBtn.addEventListener("click", () => {
       autoBtn.hidden = true;
       stopAutoBtn.addEventListener("click", () => {
         clearInterval(idAuto);
+        whiteBlack.style.color = "black";
+        memoryQty.style.color = "black";
         document.body.style.backgroundImage = "";
         stopAutoBtn.hidden = true;
         autoBtn.hidden = false;
       });
-            document.body.style.backgroundImage =
-        "url('https://c.tenor.com/qhZUzWdQLX8AAAAM/chinese-tom-tom-and-jerry.gif')";
+      whiteBlack.style.color = "white";
+      memoryQty.style.color = "white";
+
+      document.body.style.backgroundImage ="url('https://c.tenor.com/qhZUzWdQLX8AAAAM/chinese-tom-tom-and-jerry.gif')";
 
     }
   } catch (e) {
