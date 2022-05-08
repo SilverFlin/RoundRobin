@@ -424,10 +424,13 @@ autoBtn.addEventListener("click", () => {
       autoBtn.hidden = true;
       stopAutoBtn.addEventListener("click", () => {
         clearInterval(idAuto);
-
+        document.body.style.backgroundImage = "";
         stopAutoBtn.hidden = true;
         autoBtn.hidden = false;
       });
+            document.body.style.backgroundImage =
+        "url('https://c.tenor.com/qhZUzWdQLX8AAAAM/chinese-tom-tom-and-jerry.gif')";
+
     }
   } catch (e) {
     console.log("Trabajos Finalizados");
