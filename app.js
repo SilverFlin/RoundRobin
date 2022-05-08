@@ -1,4 +1,5 @@
 let tracker = 0;
+let flag = true
 //------------------Selectores----------------
 const taskTableDom = document.getElementById("taskTable");
 const memoryTableDom = document.getElementById("memoryTable");
@@ -78,7 +79,10 @@ class Proceso {
         }
       }
     } else {
-      if (tracker === 25) tracker = 0;
+      if (tracker === 25) {
+        tracker = 0;
+        flag = false
+      }
       for (let i = tracker; i < tracker + 1; i++) {
         let tarea = this.tareas;
         if (tarea[i].tamano < this.memoria) {
@@ -193,7 +197,7 @@ class Proceso {
     this.tablaProcesosDOM();
     this.tablaProcesosOrdenadosDOM();
     this.memoriaDOM();
-    taskTableDom.children[tracker].style.backgroundColor = "#79edec";
+    if(flag) taskTableDom.children[tracker].style.backgroundColor = "#79edec";
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   clearTables() {
@@ -368,7 +372,10 @@ const iniciar = () => {
   } else {
     proceso.atender();
   }
-  if (tracker === 25) tracker = 0;
+  if (tracker === 25) {
+    tracker = 0;
+    flag = false
+  }
 };
 
 //------------------Botones----------------
@@ -400,6 +407,7 @@ resetBtn.addEventListener("click", () => {
   proceso = new Proceso();
   proceso.mostrarTabla();
   tracker=0
+  flag = true
 });
 
 autoBtn.addEventListener("click", () => {
