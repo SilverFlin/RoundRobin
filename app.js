@@ -74,7 +74,7 @@ class Proceso {
     }
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  asignar() {
+  async asignar() {
     if (this.isProcesado()) {
       for (let tarea of this.tareas) {
         if (tarea.tamano < this.memoria && tarea.estado === 1) {
@@ -127,7 +127,7 @@ class Proceso {
     return null;
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  atender() {
+  async atender() {
     if (this.empi >= this.memorias.length || this.empi < 0) {
       this.empi = 0;
     }
