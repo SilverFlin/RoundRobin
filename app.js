@@ -102,7 +102,7 @@ class Proceso {
       }
       tracker++;
     }
-    await sleep(1400)
+    await sleep(800)
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isProcesado() {
@@ -150,6 +150,7 @@ class Proceso {
         mem.tiempo = this.memorias[this.empi].tiempo - this.QUANTUM;
         this.memorias[this.empi] = mem;
         this.mostrarTablasP(this.memorias[this.empi].bloque,"",this.memorias[this.empi].bloque);
+        await sleep(500);
         if (this.memorias[this.empi].tiempo <= this.QUANTUM) {
           this.getTareaM(this.memorias[this.empi].proceso).estado = 3;
           this.memoria = this.memoria + this.memorias[this.empi].tamaño;
@@ -171,7 +172,7 @@ class Proceso {
       }
       tracker++;
     }
-    await sleep(1400)
+    await sleep(800)
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isTerminado() {
