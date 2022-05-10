@@ -1,3 +1,5 @@
+const sleep = (tiempo) => new Promise((r) => setTimeout(r, tiempo));
+
 let tracker = 0;
 let flag = true
 //------------------Selectores----------------
@@ -100,6 +102,7 @@ class Proceso {
       }
       tracker++;
     }
+    await sleep(1400)
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isProcesado() {
@@ -168,6 +171,7 @@ class Proceso {
       }
       tracker++;
     }
+    await sleep(1400)
   }
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   isTerminado() {
@@ -301,16 +305,7 @@ class Proceso {
         listItem.appendChild(divContent);
         listItem.appendChild(timeBadge);
 
-        // listItem.appendChild(
-        //   document.createTextNode(
-        //     `Bloque No. ${mem.bloque} | Proceso #${mem.proceso} | Espacio ${mem.tamaño} | ${memoria.tiempo}s`
-        //   )
-        // );
-        // this.memoria -= this.memorias[memoria.numero].tamano;
-        // console.log(mem);
-        memoryTableDom
-          .appendChild(listItem)
-          .classList.add("list-group-item", "list-group-item-success");
+        memoryTableDom.appendChild(listItem).classList.add("list-group-item", "list-group-item-success");
       }
     }
     // }
@@ -421,7 +416,7 @@ autoBtn.addEventListener("click", () => {
       const idAuto = setInterval(() => {
         iniciar();
         proceso.mostrarTabla();
-      }, 300);
+      }, 1600);
       resetBtn.hidden = false;
       stopAutoBtn.hidden = false;
       autoBtn.hidden = true;
